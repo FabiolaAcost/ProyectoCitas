@@ -1,0 +1,7 @@
+<ion-card style="background-color: #f0f0f0;">
+  <ion-card-content>
+    <p style="color: blue;" *ngIf="cita">{{ cita.text }}</p>
+    <p style="color: black; font-style: italic; margin-top: 10px; text-align: right;" *ngIf="cita">{{ cita.author }}</p> 
+    <ion-icon *ngIf="permitirEliminarCitas" name="trash" (click)="eliminarCita()">
+    </ion-icon>  </ion-card-content>
+</ion-card>

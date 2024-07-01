@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Configuraciones
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-toggle (ionChange)="onToggleChange($event)"  justify="space-between">Permitir eliminar citas en el inicio</ion-toggle>
+  </ion-item>
+</ion-content>

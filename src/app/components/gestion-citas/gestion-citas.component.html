@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon name="arrow-back-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Gestión de citas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="light">
+    <ion-card-content>
+      <ion-text color="dark" style="padding-bottom: 20px;">
+        <h2>Crea una nueva cita</h2>
+      </ion-text>
+      <form #citaForm="ngForm">
+        <ion-list>
+          <ion-item>
+            <ion-input
+              type="text"
+              name="text"
+              label="Cita"
+              [(ngModel)]="nuevaCita.text"
+              placeholder="Introduce la cita"
+              required
+              minlength="5"
+              #texto="ngModel"
+            ></ion-input>
+          </ion-item>
+          <div *ngIf="texto.invalid && (texto.dirty || texto.touched)">
+            <ion-text color="danger" *ngIf="texto.errors?.['required']">La cita es obligatoria.</ion-text>
+            <ion-text color="danger" *ngIf="texto.errors?.['minlength']">La cita debe tener al menos 5 caracteres.</ion-text>
+          </div>
+
+          <ion-item>
+            <ion-input
+              type="text"
+              label="Autor"
+              name="author"
+              [(ngModel)]="nuevaCita.author"
+              placeholder="Introduce el autor"
+              required
+              minlength="2"
+              #autor="ngModel"
+            ></ion-input>
+          </ion-item>
+          <div *ngIf="autor.invalid && (autor.dirty || autor.touched)">
+            <ion-text color="danger" *ngIf="autor.errors?.['required']">El autor es obligatorio.</ion-text>
+            <ion-text color="danger" *ngIf="autor.errors?.['minlength']">El nombre del autor debe tener al menos 2 caracteres.</ion-text>
+          </div>
+        </ion-list>
+        <!-- Botón para agregar la cita -->
+        <ion-buttons slot="primary">
+          <ion-button
+            color="primary"
+            expand="full"
+            (click)="agregarCita()"
+            [disabled]="citaForm.invalid"
+          >AGREGAR +</ion-button>
+        </ion-buttons>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <div *ngFor="let cita of citas; let i = index" style="border-bottom: 1px solid #ccc; padding: 12px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <!-- Contenido de la cita -->
+      <div style="flex: 1;">
+        <p style="color: black;">{{ cita.text }}</p>
+        <p style="color: gray; font-style: italic; text-align: right;">- {{ cita.author }}</p>
+      </div>
+      <ion-icon name="trash" (click)="eliminarCita(i)" color="primary"></ion-icon>
+    </div>
+  </div>
+</ion-content>
